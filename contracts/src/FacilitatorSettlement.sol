@@ -95,6 +95,8 @@ contract FacilitatorSettlement {
         keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
     bytes32 public constant AUTH_TYPEHASH =
         keccak256("PaymentAuth(address account,address merchant,uint256 amount,uint256 nonce,uint256 deadline,bytes32 resourceHash)");
+    string public constant PAYMENT_AUTH_TYPEHASH_STR =
+        "PaymentAuth(address account,address merchant,uint256 amount,uint256 nonce,uint256 deadline,bytes32 resourceHash)";
     bytes32 public immutable DOMAIN_SEPARATOR;
 
     event PaymentSettled(
