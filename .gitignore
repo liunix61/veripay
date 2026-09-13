@@ -4,3 +4,6 @@ contracts/lib/
 contracts/broadcast/
 __pycache__/
 .env
+frontend/node_modules/
+frontend/.nuxt/
+frontend/.output/

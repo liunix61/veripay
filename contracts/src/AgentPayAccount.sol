@@ -47,6 +47,7 @@ contract AgentPayAccount {
     error TxTooLarge();
     error BudgetExhausted();
     error KeyAlreadyBound();
+    error TransferFailed();
 
     // reason codes for off-chain pre-checks (eth_call)
     bytes32 public constant R_EXPIRED        = keccak256("EXPIRED");
@@ -83,14 +84,16 @@ contract AgentPayAccount {
 
     /// @notice Pull budget from owner (owner must approve this account first).
     function fund(uint256 amount) external onlyOwner {
-        IERC20VA(usdc).transferFrom(msg.sender, address(this), amount);
+        if (!IERC20VA(usdc).transferFrom(msg.sender, address(this), amount)) {
+            revert TransferFailed();
+        }
         emit Funded(amount);
     }
 
     /// @notice Return unspent balance to owner.
     function sweep() external onlyOwner {
         uint256 bal = IERC20VA(usdc).balanceOf(address(this));
-        IERC20VA(usdc).transfer(owner, bal);
+        if (!IERC20VA(usdc).transfer(owner, bal)) revert TransferFailed();
     }
 
     /// @notice Instant freeze — faster than a credit-card block.
@@ -141,7 +144,10 @@ contract AgentPayAccount {
             revert AccountDead();
         }
         spent += amount;
-        IERC20VA(usdc).transfer(merchant, amount);
+        // USDC returns false on failure instead of reverting — a silent
+        // false here would leave spent debited, receipt logged, and the
+        // merchant unpaid. Must revert to unwind the whole settlement.
+        if (!IERC20VA(usdc).transfer(merchant, amount)) revert TransferFailed();
         emit PaymentExecuted(merchant, amount, reason);
     }
 
