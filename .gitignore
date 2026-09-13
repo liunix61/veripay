@@ -1,5 +1,6 @@
 contracts/out/
 contracts/cache/
 contracts/lib/
+contracts/broadcast/
 __pycache__/
 .env
