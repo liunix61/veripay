@@ -6,6 +6,14 @@
 budget, whitelist, per-tx cap, expiry all contract-enforced; every payment
 carries an EIP-712 authorization signature and an on-chain receipt.
 
+## Combined narrative (VeriAgent × VeriPay)
+
+VeriAgent audits every investment decision the agent makes (four-hash
+credentials + bStocks/RWA compliance + Jev/NanoJev dual-track decision-model
+auditing); VeriPay audits every payment it sends (EIP-712 authorization +
+four hard limits + on-chain receipts) — both ends of an AI agent's money
+flow are verifiably on-chain. See `docs/07-combined-narrative-veriagent-x-veripay.en.md`.
+
 ## The problem, stated plainly
 
 When agents pay autonomously for APIs/data/compute (the x402 pattern), the
