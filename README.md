@@ -42,8 +42,8 @@ Agent 引擎                     链上
 ## 快速开始
 
 ```bash
-cd contracts && forge test     # 29 tests（含 3 个跨语言奇偶校验）
-cd .. && python3 -m pytest tests/ -q   # 7 tests
+cd contracts && forge test     # 30 tests（含 EIP-712 跨语言奇偶校验）
+cd .. && python3 -m pytest tests/ -q   # 15 tests
 ```
 
 ## V2 路线图：跟单钱包（FOMO 社交化交易）

@@ -52,8 +52,8 @@ asserted in BOTH pytest and forge test (`Eip712Parity.t.sol`).
 ## Quickstart
 
 ```bash
-cd contracts && forge test     # 29 tests (incl. 3 parity)
-cd .. && python3 -m pytest tests/ -q   # 7 tests
+cd contracts && forge test     # 30 tests (incl. 3 parity)
+cd .. && python3 -m pytest tests/ -q   # 15 tests
 ```
 
 ## V2 roadmap: the copy-trading wallet (FOMO-style social trading)
